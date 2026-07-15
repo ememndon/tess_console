@@ -6,7 +6,7 @@ role-based human oversight.**
 
 Built solo, from empty repo to production, in TypeScript/Next.js on a self-managed VPS.
 
-> 📌 **This is a public portfolio snapshot for hiring managers and developers to review.**
+> 📌 **This is a public portfolio snapshot for you to review.**
 > Infrastructure runbooks, internal docs, and all secrets/credentials are excluded — this
 > repo is source-for-review, not a turnkey deploy.
 
