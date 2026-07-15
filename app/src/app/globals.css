@@ -1,0 +1,437 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-heading: var(--font-inter);
+  /* Per-site accent colors: subtle, not loud. */
+  --color-site-calculatry: var(--site-calculatry);
+  --color-site-resumehub: var(--site-resumehub);
+  --color-site-checkinvest: var(--site-checkinvest);
+  /* Accent palette new sites pick from (Settings → Sites). */
+  --color-site-blue: var(--site-blue);
+  --color-site-purple: var(--site-purple);
+  --color-site-teal: var(--site-teal);
+  --color-site-amber: var(--site-amber);
+  --color-site-rose: var(--site-rose);
+  --color-site-cyan: var(--site-cyan);
+  --color-site-green: var(--site-green);
+  --color-site-orange: var(--site-orange);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  /* Semantic accent hues — for stat tiles, progress bars, "alive" highlights. */
+  --color-success: var(--success);
+  --color-info: var(--info);
+  --color-warning: var(--warning);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ── Pulse-inspired theme ──────────────────────────────────────────────────
+   A colorful indigo/violet system: violet primary (matches the brand mark),
+   a rainbow chart palette (violet / blue / emerald / amber / pink) and a soft
+   indigo glow behind the content. Hues are shared across light + dark and
+   tuned per mode for contrast. */
+
+:root {
+  /* Light "Pearl & Amethyst": near-white ivory canvas, crisp white cards. PRIMARY
+     is a deep saturated ROYAL PURPLE (#2e0161) — bold, high-contrast, premium.
+     Selected sidebar items + primary buttons fill solid with it. Subtle violet
+     hover tints, gold/blue/pink chart palette for complementary richness. */
+  --background: oklch(0.980 0.008 290);
+  --foreground: oklch(0.20 0.060 294);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.20 0.060 294);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.20 0.060 294);
+  --primary: #2e0161;
+  --primary-foreground: oklch(0.98 0.012 305);
+  --secondary: oklch(0.945 0.030 300);
+  --secondary-foreground: oklch(0.30 0.120 305);
+  --muted: oklch(0.955 0.018 300);
+  --muted-foreground: oklch(0.48 0.050 300);
+  --accent: oklch(0.930 0.050 305);
+  --accent-foreground: oklch(0.28 0.150 305);
+  --destructive: oklch(0.58 0.248 22);
+  --border: oklch(0.89 0.026 300);
+  --input: oklch(0.91 0.026 300);
+  --ring: #2e0161;
+  --chart-1: #2e0161;
+  --chart-2: oklch(0.64 0.180 72);
+  --chart-3: oklch(0.52 0.220 228);
+  --chart-4: oklch(0.56 0.245 352);
+  --chart-5: oklch(0.58 0.160 172);
+  --success: oklch(0.56 0.170 160);
+  --info: oklch(0.52 0.220 228);
+  --warning: oklch(0.60 0.185 78);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.962 0.022 300);
+  --sidebar-foreground: oklch(0.32 0.070 300);
+  --sidebar-primary: #2e0161;
+  --sidebar-primary-foreground: oklch(0.98 0.012 305);
+  --sidebar-accent: oklch(0.930 0.050 305);
+  --sidebar-accent-foreground: oklch(0.28 0.150 305);
+  --sidebar-border: oklch(0.89 0.026 300);
+  --sidebar-ring: #2e0161;
+}
+
+.dark {
+  /* Dark "Midnight Jewel": a near-black navy base with an electric VIOLET aurora
+     and a VIVID ORANGE primary accent (hue ~41, matches the Tess agent button).
+     Orange on deep-navy is bold, warm, and high-contrast — the sidebar active
+     state and all primary actions glow orange. Warning shifts to amber-gold so
+     it's distinct from the orange primary. Jewel chart palette stays vivid. */
+  --background: oklch(0.085 0.013 285);
+  --foreground: oklch(0.97 0.012 290);
+  --card: oklch(0.26 0.090 278 / 0.55);
+  --card-foreground: oklch(0.97 0.012 290);
+  --popover: oklch(0.165 0.065 272);
+  --popover-foreground: oklch(0.97 0.012 290);
+  --primary: oklch(0.72 0.225 41);
+  --primary-foreground: oklch(0.16 0.060 35);
+  --secondary: oklch(0.30 0.085 280);
+  --secondary-foreground: oklch(0.97 0.012 290);
+  --muted: oklch(0.27 0.065 278);
+  --muted-foreground: oklch(0.78 0.045 290);
+  --accent: oklch(0.28 0.095 42);
+  --accent-foreground: oklch(0.97 0.012 290);
+  --destructive: oklch(0.68 0.235 15);
+  --border: oklch(0.85 0.080 282 / 0.16);
+  --input: oklch(0.85 0.080 282 / 0.20);
+  --ring: oklch(0.72 0.215 41);
+  --chart-1: oklch(0.74 0.230 41);
+  --chart-2: oklch(0.72 0.245 318);
+  --chart-3: oklch(0.78 0.170 198);
+  --chart-4: oklch(0.70 0.250 290);
+  --chart-5: oklch(0.74 0.215 350);
+  --success: oklch(0.80 0.180 160);
+  --info: oklch(0.76 0.160 220);
+  --warning: oklch(0.82 0.190 78);
+  --sidebar: oklch(0.135 0.060 268);
+  --sidebar-foreground: oklch(0.86 0.030 285);
+  --sidebar-primary: oklch(0.72 0.225 41);
+  --sidebar-primary-foreground: oklch(0.16 0.060 35);
+  --sidebar-accent: oklch(0.26 0.095 42);
+  --sidebar-accent-foreground: oklch(0.82 0.205 43);
+  --sidebar-border: oklch(0.85 0.080 282 / 0.12);
+  --sidebar-ring: oklch(0.72 0.215 41);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* The "gorgeous" part: dual focal glows — warm gold bloom at top-right (warmth,
+   richness), electric violet mist at bottom-left (depth, drama). Light mode is a
+   high-key ivory canvas; dark mode is a deep-space aurora. Both are fixed so the
+   gradient stays put as the page scrolls. */
+body {
+  background-image:
+    radial-gradient(130% 78% at 102% -5%, rgba(60, 12, 120, 0.16), transparent 52%),
+    radial-gradient(108% 90% at -8% 108%, rgba(110, 40, 200, 0.20), transparent 50%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+.dark body {
+  /* "Midnight Jewel" aurora: electric violet surge at bottom-left, vivid ORANGE
+     warmth at top-right (matches the primary accent), over a dark violet-slate base
+     (lifted from near-black so the UI reads with depth, on screen and on camera).
+     The whole shell (nav, sidebar, header) is transparent in dark so this single
+     fixed layer shows through everything — one coherent scene. */
+  background-image:
+    radial-gradient(ellipse 72% 62% at 4% 100%, rgba(95, 55, 250, 0.20), transparent 56%),
+    radial-gradient(ellipse 56% 40% at 96% 0%, rgba(255, 178, 0, 0.10), transparent 50%),
+    linear-gradient(168deg, #1a1723 0%, #141119 50%, #1c1626 100%);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Glassmorphism: override --card itself so bg-card utilities also go transparent.
+   Backdrop blur on all Cards and bordered rounded-xl inside sections.
+   Light: near-opaque crisp white (88%) with stronger blur for a clean reading
+   surface. Dark: dark navy-blue crystal at 22% — shows the aurora behind it.
+   Gradient status banners excluded so semantic colors stay intact. */
+.dark [data-section] {
+  --card: oklch(0.18 0.095 275 / 0.22);
+}
+[data-section] [data-slot="card"],
+[data-section] .rounded-xl[class~="border"]:not([class*="bg-gradient"]) {
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  background-color: oklch(0.998 0.004 294 / 0.88);
+}
+.dark [data-section] [data-slot="card"],
+.dark [data-section] .rounded-xl[class~="border"]:not([class*="bg-gradient"]) {
+  background-color: oklch(0.18 0.095 275 / 0.22);
+  /* The "Pulse glow": a radiant hairline in the section's own hue, real depth, and a
+     soft coloured bloom underneath — so every card on every page reads like the
+     Site Overview cards. --glow is set per section below (falls back to violet).
+     An inline box-shadow on a specific card (e.g. the brand-coloured site cards)
+     still wins, so those keep their own colour. */
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--glow, oklch(0.62 0.24 293)) 22%, transparent),
+    0 18px 42px -26px rgba(0, 0, 0, 0.9),
+    0 8px 34px -18px color-mix(in oklch, var(--glow, oklch(0.62 0.24 293)) 40%, transparent);
+}
+.dark [data-section] [data-slot="card"]:hover,
+.dark [data-section] .rounded-xl[class~="border"]:not([class*="bg-gradient"]):hover {
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--glow, oklch(0.62 0.24 293)) 34%, transparent),
+    0 22px 48px -26px rgba(0, 0, 0, 0.92),
+    0 10px 40px -16px color-mix(in oklch, var(--glow, oklch(0.62 0.24 293)) 55%, transparent);
+}
+
+/* Per-site accents — same hues in both themes, tuned for contrast. */
+:root {
+  --site-calculatry: oklch(0.55 0.18 255);
+  --site-resumehub: oklch(0.318 0.155 312);
+  --site-checkinvest: oklch(0.6 0.14 175);
+  /* Accent palette for additional sites. */
+  --site-blue: oklch(0.55 0.18 255);
+  --site-purple: oklch(0.46 0.19 305);
+  --site-teal: oklch(0.6 0.14 175);
+  --site-amber: oklch(0.62 0.15 70);
+  --site-rose: oklch(0.6 0.2 15);
+  --site-cyan: oklch(0.6 0.13 215);
+  --site-green: oklch(0.58 0.16 150);
+  --site-orange: oklch(0.63 0.18 45);
+}
+.dark {
+  --site-calculatry: oklch(0.7 0.16 255);
+  --site-resumehub: oklch(0.703 0.183 50.6);
+  --site-checkinvest: oklch(0.76 0.13 175);
+  /* Accent palette for additional sites. */
+  --site-blue: oklch(0.7 0.16 255);
+  --site-purple: oklch(0.68 0.19 305);
+  --site-teal: oklch(0.76 0.13 175);
+  --site-amber: oklch(0.8 0.15 75);
+  --site-rose: oklch(0.72 0.19 15);
+  --site-cyan: oklch(0.75 0.12 215);
+  --site-green: oklch(0.75 0.15 150);
+  --site-orange: oklch(0.74 0.17 45);
+}
+
+/* Per-section widget border accent — overrides --border so every Card, divider,
+   and form field in a section automatically gets its hue. Explicit border-color
+   classes (e.g. semantic status borders) take precedence as usual. */
+[data-section="overview"]      { --border: oklch(0.606 0.250 293 / 0.30); }
+[data-section="analytics"]     { --border: oklch(0.607 0.204 252 / 0.30); }
+[data-section="social"]        { --border: oklch(0.656 0.241 354 / 0.30); }
+[data-section="demo"]          { --border: oklch(0.579 0.234 281 / 0.30); }
+[data-section="seo"]           { --border: oklch(0.714 0.165 200 / 0.30); }
+[data-section="competitors"]   { --border: oklch(0.628 0.258 24  / 0.30); }
+[data-section="inbox"]         { --border: oklch(0.671 0.179 225 / 0.30); }
+[data-section="outreach"]      { --border: oklch(0.764 0.181 80  / 0.30); }
+[data-section="health"]        { --border: oklch(0.697 0.173 158 / 0.30); }
+[data-section="feedback"]      { --border: oklch(0.667 0.286 322 / 0.30); }
+[data-section="playbooks"]     { --border: oklch(0.549 0.245 264 / 0.30); }
+[data-section="jobs"]          { --border: oklch(0.688 0.161 185 / 0.30); }
+[data-section="audit"]         { --border: oklch(0.666 0.024 270 / 0.35); }
+[data-section="agent"]         { --border: oklch(0.703 0.183 51  / 0.35); }
+[data-section="notifications"] { --border: oklch(0.828 0.185 96  / 0.30); }
+[data-section="settings"]      { --border: oklch(0.553 0.011 286 / 0.40); }
+
+/* Per-section GLOW hue — the radiant (bright, high-chroma) version of each section's
+   accent, used by the dark-mode card box-shadow above so every page glows in its
+   own signature colour, the way the Site Overview cards glow in their brand colour. */
+[data-section="overview"]      { --glow: oklch(0.64 0.24 293); }
+[data-section="analytics"]     { --glow: oklch(0.64 0.20 252); }
+[data-section="social"]        { --glow: oklch(0.67 0.24 354); }
+[data-section="demo"]          { --glow: oklch(0.62 0.23 281); }
+[data-section="seo"]           { --glow: oklch(0.74 0.16 200); }
+[data-section="competitors"]   { --glow: oklch(0.64 0.25 24); }
+[data-section="inbox"]         { --glow: oklch(0.68 0.18 225); }
+[data-section="outreach"]      { --glow: oklch(0.78 0.18 80); }
+[data-section="health"]        { --glow: oklch(0.71 0.17 158); }
+[data-section="feedback"]      { --glow: oklch(0.68 0.27 322); }
+[data-section="playbooks"]     { --glow: oklch(0.60 0.24 264); }
+[data-section="jobs"]          { --glow: oklch(0.71 0.16 185); }
+[data-section="audit"]         { --glow: oklch(0.62 0.045 270); }
+[data-section="agent"]         { --glow: oklch(0.71 0.18 51); }
+[data-section="notifications"] { --glow: oklch(0.84 0.18 96); }
+[data-section="settings"]      { --glow: oklch(0.58 0.03 286); }
+
+/* Data tables: Inter with tabular numerals. */
+.tabular-nums, table {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   FILAMENT — the new design language. Everything below is scoped to
+   [data-design="filament"] and appended last so it wins equal-specificity ties
+   over the legacy Pulse tokens above. The legacy :root/.dark blocks are NEVER
+   edited, so flipping the cookie back to "pulse" restores the original exactly.
+   Concept: light is data. A voltage-cyan "current" flows toward what needs you;
+   surfaces are flat hairline, not glass; numerals are the instrument.
+   ════════════════════════════════════════════════════════════════════════════ */
+[data-design="filament"] {
+  --background: #070809;
+  --foreground: #eef1f4;
+  --card: rgba(255, 255, 255, 0.022);
+  --card-foreground: #eef1f4;
+  --popover: #0d0f13;
+  --popover-foreground: #eef1f4;
+  --primary: #27f0d4;
+  --primary-foreground: #06231f;
+  --secondary: rgba(255, 255, 255, 0.06);
+  --secondary-foreground: #eef1f4;
+  --muted: rgba(255, 255, 255, 0.045);
+  --muted-foreground: #9398a3;
+  --accent: rgba(39, 240, 212, 0.12);
+  --accent-foreground: #8bffec;
+  --destructive: #ff4d6d;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: #27f0d4;
+  --chart-1: #27f0d4;
+  --chart-2: #3b82f6;
+  --chart-3: #34e08a;
+  --chart-4: #ffc24d;
+  --chart-5: #ff3d8a;
+  --success: #34e08a;
+  --info: #27f0d4;
+  --warning: #ffc24d;
+  --radius: 0.7rem;
+  --sidebar: #0a0b0d;
+  --sidebar-foreground: #c7cbd2;
+  --sidebar-primary: #27f0d4;
+  --sidebar-primary-foreground: #06231f;
+  --sidebar-accent: rgba(39, 240, 212, 0.12);
+  --sidebar-accent-foreground: #8bffec;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-ring: #27f0d4;
+}
+
+/* The substrate: a calm cyan field over deep ink with a faint instrument grid.
+   (Reflects state in code: warnings tint it amber, criticals pulse magenta.) */
+[data-design="filament"] body,
+[data-design="filament"].dark body {
+  background-image:
+    radial-gradient(680px 440px at 16% 10%, rgba(39, 240, 212, 0.10), transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.020) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.020) 1px, transparent 1px);
+  background-size: cover, 36px 36px, 36px 36px;
+  background-position: center, center, center;
+  background-attachment: fixed;
+  background-repeat: no-repeat, repeat, repeat;
+}
+
+/* Kill the legacy glass: Filament surfaces are flat hairline, not frosted. */
+[data-design="filament"] [data-slot="card"],
+[data-design="filament"] [data-section] [data-slot="card"],
+[data-design="filament"] [data-section] .rounded-xl[class~="border"]:not([class*="bg-gradient"]) {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: rgba(255, 255, 255, 0.022);
+}
+/* Calm, uniform hairline borders — drop the per-section accent hues. */
+[data-design="filament"] [data-section] {
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+/* Filament motion primitives (used by the rail core + the Overview system core). */
+@keyframes fil-spin { to { transform: rotate(360deg); } }
+@keyframes fil-breathe { 0%, 100% { opacity: 0.4; transform: scale(1); } 50% { opacity: 0.85; transform: scale(1.16); } }
+@keyframes fil-surge { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+.fil-spin { transform-box: fill-box; transform-origin: center; animation: fil-spin 46s linear infinite; }
+.fil-nuc { transform-box: fill-box; transform-origin: center; animation: fil-breathe 3.6s ease-in-out infinite; }
+.fil-surge { animation: fil-surge 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .fil-spin, .fil-nuc, .fil-surge { animation: none; }
+}
+
+/* ── Global cascade: give every (non-bespoke) page the Filament "Surface"
+   register automatically. Pulse's rainbow gradient stat-tiles + banners flatten
+   into flat hairline instruments; tile/card elevation goes flat. The bespoke
+   Overview uses inline styles (no bg-gradient-to-* class) so it's unaffected. */
+[data-design="filament"] [class*="bg-gradient-to-"] {
+  background-image: none !important;
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none !important;
+}
+[data-design="filament"] [class*="bg-gradient-to-"] [aria-hidden] { opacity: 0.05; }
+[data-design="filament"] [data-slot="card"] { box-shadow: none; }
+/* Flattened stat-tiles read as instruments: tabular mono numerals. */
+[data-design="filament"] [class*="bg-gradient-to-"] .tabular-nums { font-family: var(--font-mono); font-weight: 500; }
+
+/* Section titles read as instrument labels; primary actions carry the current. */
+[data-design="filament"] [data-section] > .flex h1 {
+  letter-spacing: -0.01em;
+}
+[data-design="filament"] .tabular-nums,
+[data-design="filament"] table { font-variant-numeric: tabular-nums; }
+
+/* ── Capture-mode redaction ────────────────────────────────────────────────
+   html.tess-capture is set by the inline script in the root layout ONLY when
+   Tess's recorder is filming (window.__tessCapture / localStorage flag from
+   the recorder's init script). Elements tagged .redact blur beyond legibility
+   in the footage; .redact-strong for dense PII blocks (email bodies, JSON
+   detail). Zero effect outside capture mode. */
+html.tess-capture .redact {
+  filter: blur(7px) !important;
+  user-select: none;
+  pointer-events: none;
+}
+html.tess-capture .redact-strong {
+  filter: blur(16px) !important;
+  user-select: none;
+  pointer-events: none;
+}
+/* Per-pass override: the Inbox/Outreach showcase sections film against fabricated
+   sample data that is safe to show, so the recorder sets html.tess-no-redact and the
+   blur is lifted for those passes only. Every real-PII section keeps the blur above. */
+html.tess-capture.tess-no-redact .redact,
+html.tess-capture.tess-no-redact .redact-strong {
+  filter: none !important;
+  user-select: auto;
+  pointer-events: auto;
+}

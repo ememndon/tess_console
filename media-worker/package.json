@@ -1,0 +1,24 @@
+{
+  "name": "tess-media-worker",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Demo Studio render worker — drives live sites with Playwright, narrates with Piper, composes branded demo videos with ffmpeg.",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "compose": "tsx src/compose-runner.ts"
+  },
+  "dependencies": {
+    "@remotion/bundler": "^4.0.479",
+    "@remotion/fonts": "^4.0.479",
+    "@remotion/lottie": "^4.0.481",
+    "@remotion/motion-blur": "^4.0.479",
+    "@remotion/renderer": "^4.0.479",
+    "lottie-web": "^5.13.0",
+    "playwright": "1.49.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "remotion": "^4.0.479",
+    "tsx": "^4.19.2"
+  }
+}

@@ -1,0 +1,6 @@
+# Secrets never enter the image — env comes from compose at runtime.
+.env*
+node_modules
+.next
+Dockerfile
+.dockerignore

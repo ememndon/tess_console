@@ -1,0 +1,24 @@
+# Secrets — never committed (vault pattern)
+.env
+
+# Local database dumps
+backups/
+
+# Node / Next.js build artifacts (Phase 1+)
+node_modules/
+.next/
+
+# Generated social media + outbox (not source)
+/media/
+
+# Cron job logs (emison-owned runtime logs, not source)
+/logs/
+.rclone.conf
+
+# Stray local screen recording (owner's, not part of the app)
+Recording.mp4
+*.mp4
+
+# Owner's reference thumbnail images dropped at repo root (not part of the app)
+*-SD.jpg
+Screenshot*.png
