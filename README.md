@@ -28,12 +28,25 @@ than the human explicitly grants it.
 
 ## Screenshots
 
-| YouTube Pack — planner-driven thumbnails | Auto-generated OG/social banner | Auto-generated OG/social banner |
-|:---:|:---:|:---:|
-| ![YouTube thumbnail picker](.github/assets/screenshot-youtube-pack.png) | ![Calculatry banner](.github/assets/screenshot-banner-calculatry.png) | ![GlobalResumeHub banner](.github/assets/screenshot-banner-globalresumehub.png) |
+> Captured from a throwaway instance seeded with synthetic data — not the live production
+> console.
 
-*(Console dashboard screenshots are withheld from this public snapshot since they render
-live production data — happy to walk through the live app on a call.)*
+**Site Overview** — all three properties at a glance, KPI tiles, pending approvals queue
+
+![Site Overview](.github/assets/screenshot-overview.png)
+
+**Analytics** — first-party, cookieless traffic with a live real-time feed
+
+![Analytics](.github/assets/screenshot-analytics.png)
+
+**Social Studio** — the post queue across brands, autonomous vs. manual-handoff platforms
+
+![Social Studio](.github/assets/screenshot-social-studio.png)
+
+**Tess (Agent)** — the agent's command center: kill switch, per-module pause, budget meter,
+approval queue
+
+![Tess Agent](.github/assets/screenshot-agent.png)
 
 ## Feature surface
 
