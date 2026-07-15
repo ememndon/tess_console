@@ -1,7 +1,7 @@
 # Tess Console
 
 **A self-hosted operations platform where an AI agent (Tess) runs marketing, content, SEO,
-support, and site-health for a small portfolio of live production websites — under
+support, and site-health for a small portfolio of live production websites, all under
 role-based human oversight.**
 
 Built solo, from empty repo to production, in TypeScript/Next.js on a self-managed VPS.
