@@ -26,6 +26,17 @@ It's the kind of system that's easy to demo and hard to build correctly: real in
 money-adjacent copy, real infra, and an LLM in the loop that must never be given more trust
 than the human explicitly grants it.
 
+## Demo video
+
+<a href="https://ememndon.com/videos/tess_console.mp4">
+  <img src=".github/assets/video-poster.png" alt="Tess Console quick tour — click to play" width="100%">
+</a>
+
+<video src="https://ememndon.com/videos/tess_console.mp4" poster=".github/assets/video-poster.png" controls width="100%"></video>
+
+*(Click the image above to watch — the embedded player above it may not autoplay everywhere,
+but the link always works.)*
+
 ## Screenshots
 
 > Captured from a throwaway instance seeded with synthetic data — not the live production
