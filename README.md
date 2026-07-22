@@ -7,20 +7,21 @@ role-based human oversight.**
 Built solo, from empty repo to production, in TypeScript/Next.js on a self-managed VPS.
 
 > 📌 **This is a public portfolio snapshot for you to review.**
-> Infrastructure runbooks, internal docs, and all secrets/credentials are excluded — this
-> repo is source-for-review, not a turnkey deploy.
+> Infrastructure runbooks, internal docs, and all secrets and credentials are excluded.
+> This repo is source for review, not a turnkey deploy.
 
 ---
 
 ## What it is
 
-Tess Console operates three live businesses — [calculatry.com](https://calculatry.com) (finance
-calculators), [globalresumehub.com](https://globalresumehub.com) (resume tooling), and
-checkinvestng.com (investment info) — through a single admin console. An AI agent ("Tess",
-powered by Claude, with OpenAI/DeepSeek/Gemini/Qwen as pluggable alternatives) reads inbox
-mail, drafts and publishes social posts, writes SEO content, watches uptime and rates, and
-proposes/executes a whitelisted set of server actions — all inside permission boundaries a
-human admin controls.
+Tess Console runs three live websites through a single admin console:
+[calculatry.com](https://calculatry.com) (finance calculators),
+[globalresumehub.com](https://globalresumehub.com) (resume tooling), and
+checkinvestng.com (investment info). An AI agent ("Tess", powered by Claude, with
+OpenAI/DeepSeek/Gemini/Qwen as pluggable alternatives) reads inbox mail, drafts and publishes
+social posts, writes SEO content, watches uptime and rates, and proposes or executes a
+whitelisted set of server actions. Every one of those actions stays inside permission
+boundaries that a human admin controls.
 
 It's the kind of system that's easy to demo and hard to build correctly: real inboxes, real
 money-adjacent copy, real infra, and an LLM in the loop that must never be given more trust
@@ -29,33 +30,33 @@ than the human explicitly grants it.
 ## Demo video
 
 <a href="https://ememndon.com/videos/tess_console.mp4">
-  <img src=".github/assets/video-poster.png" alt="Tess Console quick tour — click to play" width="100%">
+  <img src=".github/assets/video-poster.png" alt="Tess Console quick tour, click to play" width="100%">
 </a>
 
 <video src="https://ememndon.com/videos/tess_console.mp4" poster=".github/assets/video-poster.png" controls width="100%"></video>
 
-*(Click the image above to watch — the embedded player above it may not autoplay everywhere,
-but the link always works.)*
+*(Click the image above to watch. The embedded player may not autoplay everywhere, but the
+link always works.)*
 
 ## Screenshots
 
-> Captured from a throwaway instance seeded with synthetic data — not the live production
+> Captured from a throwaway instance seeded with synthetic data, not the live production
 > console.
 
-**Site Overview** — all three properties at a glance, KPI tiles, pending approvals queue
+**Site Overview:** all three properties at a glance, KPI tiles, pending approvals queue
 
 ![Site Overview](.github/assets/screenshot-overview.png)
 
-**Analytics** — first-party, cookieless traffic with a live real-time feed
+**Analytics:** first-party, cookieless traffic with a live real-time feed
 
 ![Analytics](.github/assets/screenshot-analytics.png)
 
-**Social Studio** — the post queue across brands, autonomous vs. manual-handoff platforms
+**Social Studio:** the post queue across brands, autonomous vs. manual-handoff platforms
 
 ![Social Studio](.github/assets/screenshot-social-studio.png)
 
-**Tess (Agent)** — the agent's command center: kill switch, per-module pause, budget meter,
-approval queue
+**Tess (Agent):** the agent's command center, with kill switch, per-module pause, budget
+meter, and approval queue
 
 ![Tess Agent](.github/assets/screenshot-agent.png)
 
@@ -66,7 +67,7 @@ approval queue
   server actions, notifications) gated by an explicit per-tool permission model
 - A deterministic "keep running" layer (cron) so heartbeats, backups, and publishing never
   depend on the LLM being available or well-behaved
-- Kill switch + per-task model routing (assign cheap/fast vs. frontier models per job type)
+- Kill switch plus per-task model routing (assign cheap/fast vs. frontier models per job type)
 
 **Content, SEO & social**
 - AI-drafted blog/SEO content with a content-strategy planner and Google Search Console
@@ -74,9 +75,9 @@ approval queue
 - Social Studio: hook-led, platform-native post drafts (X/Facebook/Instagram/LinkedIn/
   YouTube) generated from a per-site "strategy brain," with a caption studio and Instagram
   carousel generator
-- Manual-approval posting workflow — nothing goes out without a human clicking publish
-- YouTube Pack: SEO titles/descriptions + AI-composited thumbnails, planner-scored against a
-  CTR heuristic before you pick one
+- Manual-approval posting workflow, so nothing goes out without a human clicking publish
+- YouTube Pack: SEO titles/descriptions plus AI-composited thumbnails, planner-scored against
+  a CTR heuristic before you pick one
 - Satori-rendered OG/social banners and Remotion-rendered demo/intro videos, generated
   on-brand per site (no generic templates)
 
@@ -93,8 +94,8 @@ approval queue
 **Admin & security**
 - 3-tier RBAC (Admin / Manager / User) enforced at both the page and API layer
 - Encrypted secrets vault (AES, server-only decrypt) with live "test connection" probes per
-  provider — never exposes raw values to the client or logs
-- Full audit log of agent + admin actions
+  provider. Raw values are never exposed to the client or to logs
+- Full audit log of agent and admin actions
 - Automated security posture checks (firewall, fail2ban, SSH hardening, pending updates)
   surfaced to the admin, with Tess intentionally denied root
 
@@ -136,7 +137,7 @@ flowchart LR
 Each generation-heavy capability (video render, face restoration, background matting,
 thumbnail compositing) is split into its own containerized worker so a slow render can never
 block the request path of the main app. Everything talks over an internal Docker network,
-authenticated with a shared internal key — none of it is reachable from the internet directly.
+authenticated with a shared internal key. None of it is reachable from the internet directly.
 
 ## Tech stack
 
@@ -173,11 +174,11 @@ docker-compose.yml     Full service topology
 
 ## Running it
 
-This snapshot excludes secrets, TLS config, and infra runbooks, so it won't deploy as-is —
-but the shape is:
+This snapshot excludes secrets, TLS config, and infra runbooks, so it will not deploy as is.
+The shape is:
 
 ```bash
-cp app/.env.example app/.env   # not included in this snapshot — see docker-compose.yml
+cp app/.env.example app/.env   # not in this snapshot. See docker-compose.yml
                                 # for the required variables (DATABASE_URL, VAULT_MASTER_KEY,
                                 # SESSION_SECRET, INTERNAL_SYNC_KEY, ...)
 docker compose up -d           # starts db, app, and all worker services
@@ -185,11 +186,11 @@ docker compose logs -f app
 ```
 
 Secrets for third-party integrations (LLM providers, mail, analytics) are entered at runtime
-through the in-app Secrets Vault — nothing is hardcoded or required at build time beyond the
+through the in-app Secrets Vault. Nothing is hardcoded or required at build time beyond the
 core platform variables above.
 
 ## License
 
-Proprietary — all rights reserved. Shared publicly for review purposes (portfolio, hiring,
+Proprietary. All rights reserved. Shared publicly for review purposes (portfolio, hiring,
 technical due diligence). Not licensed for reuse, redistribution, or deployment. See
 [LICENSE](LICENSE).
